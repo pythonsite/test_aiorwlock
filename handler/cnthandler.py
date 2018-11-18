@@ -28,6 +28,11 @@ class CntHandler(object):
         return resp
 
     async def cnt_set(self, request):
+        """
+        用于设置company表中的count值
+        :param request:
+        :return:
+        """
         post = await request.post()
         logging.info('post %s', post)
         company_name = post.get("company")
@@ -59,6 +64,11 @@ class CntHandler(object):
             return self.response(request, msg)
 
     async def cnt_inc(self, request):
+        """
+        用于增加company表中的count值
+        :param request:
+        :return:
+        """
         post = await request.post()
         logging.info('post %s', post)
         company_name = post.get("company")
@@ -69,7 +79,7 @@ class CntHandler(object):
             self.company_lock[company_name] = rwlock
         async with rwlock.writer:
             uuid_s = uuid.uuid1().hex
-            logging.info("[%s]---[%s]", uuid_s, id(rwlock))
+            logging.debug("[%s]---[%s]", uuid_s, id(rwlock))
             msg = dict()
             sql = "select * from shield.company where name=%s"
             po = await self.db.get(sql, company_name)
@@ -95,6 +105,11 @@ class CntHandler(object):
             return self.response(request, msg)
 
     async def cnt_dec(self, request):
+        """
+        用于减少company表中count的值
+        :param request:
+        :return:
+        """
         post = await request.post()
         logging.info('post %s', post)
         company_name = post.get("company")
@@ -105,7 +120,7 @@ class CntHandler(object):
             self.company_lock[company_name] = rwlock
         async with rwlock.writer:
             uuid_s = uuid.uuid1().hex
-            logging.info("[%s]---[%s]", uuid_s, id(rwlock))
+            logging.debug("[%s]---[%s]", uuid_s, id(rwlock))
             msg = dict()
             sql = "select * from shield.company where name=%s"
             po = await self.db.get(sql, company_name)
