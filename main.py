@@ -47,9 +47,9 @@ def setLog():
 
 def main():
     setLog()
-    pid = daemon()
-    if pid:
-        return pid
+    # pid = daemon()
+    # if pid:
+    #     return pid
     app = Application()
     app.run_forever()
 

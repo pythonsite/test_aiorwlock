@@ -72,12 +72,9 @@ class Application:
         while True:
             try:
                 self.load()
-                self.setLog()
+                # self.setLog()
                 self.loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(self.loop)
-                # self.loop = asyncio.get_event_loop()
-                # self.loop.run_until_complete(self.app_factory())
-                # self.loop.run_forever()
                 ctx = None
                 if self.http["sslenable"]:
                     ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
