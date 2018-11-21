@@ -72,7 +72,7 @@ class Application:
         while True:
             try:
                 self.load()
-                # self.setLog()
+                self.setLog()
                 self.loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(self.loop)
                 ctx = None
